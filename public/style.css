@@ -1,0 +1,216 @@
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --text: #1d2330;
+  --muted: #6b7280;
+  --border: #e3e6eb;
+  --accent: #2563eb;
+  --danger: #dc2626;
+  --running: #ecfdf3;
+  --running-border: #86efac;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+body { margin: 0; }
+
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+h1 { font-size: 1.6rem; margin: 0 0 16px; }
+h2 { font-size: 1.1rem; margin: 0; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.toolbar { display: grid; gap: 12px; }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+input, select {
+  font: inherit;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  min-width: 0;
+  background: #fff;
+}
+
+input:not(.date) { flex: 1 1 200px; }
+input.date { width: 8.5em; }
+
+/* Date filter with its English calendar (see datepicker.js) */
+
+.date-field { position: relative; }
+
+.datepicker {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 10;
+  width: 16em;
+  padding: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.dp-head, .dp-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dp-head { margin-bottom: 6px; font-weight: 600; }
+.dp-foot { margin-top: 6px; }
+
+.dp-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  text-align: center;
+}
+
+.dp-weekday { color: var(--muted); font-size: 0.8em; padding: 4px 0; }
+
+.datepicker button {
+  background: transparent;
+  color: var(--text);
+  padding: 4px 0;
+  border-radius: 4px;
+}
+
+.datepicker button:hover { background: var(--bg); }
+.datepicker button.today { box-shadow: inset 0 0 0 1px var(--accent); }
+.datepicker button.selected { background: var(--accent); color: #fff; }
+.dp-head button, .dp-foot button { color: var(--accent); padding: 4px 10px; }
+
+button {
+  font: inherit;
+  padding: 7px 14px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+button.stop { background: var(--danger); }
+button.link { background: transparent; color: var(--accent); padding-inline: 4px; }
+
+button.continue {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+.grand-total { margin-left: auto; white-space: nowrap; }
+
+/* Employee card: name and total, the timer, then the entries */
+
+.employee.running { border-color: var(--running-border); }
+
+.card-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin-bottom: 12px;
+}
+
+.toggle {
+  background: transparent;
+  color: inherit;
+  font-weight: inherit;
+  padding: 0;
+  text-align: left;
+  max-width: 100%;
+}
+
+/* Long one-word names and tasks (ticket ids, snake_case) wrap instead of widening the page on phones. */
+td, .timer .task, .toggle { overflow-wrap: anywhere; }
+.card-head h2 { min-width: 0; }
+
+.chevron {
+  display: inline-block;
+  width: 1.2em;
+  margin-right: 0.3em;
+  font-size: 0.75em;
+  text-align: center;
+  color: var(--muted);
+  transition: transform 0.15s;
+}
+
+.toggle[aria-expanded="true"] .chevron { transform: rotate(90deg); }
+
+.total { white-space: nowrap; color: var(--muted); }
+.total .duration { color: var(--text); font-weight: 600; }
+
+.timer.running {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--running);
+}
+
+.timer .task { flex: 1 1 200px; font-weight: 600; }
+.now { color: var(--muted); white-space: nowrap; }
+.elapsed { color: var(--text); font-variant-numeric: tabular-nums; font-weight: 600; }
+
+.muted { color: var(--muted); }
+.employee > .muted { margin: 12px 0 0; }
+
+.message {
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: #fef2f2;
+  color: var(--danger);
+  border: 1px solid #fecaca;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+th, td {
+  text-align: left;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+tr.running td { background: var(--running); font-weight: 600; }
+
+.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.action { text-align: right; width: 1%; }
+.of { display: block; color: var(--muted); font-size: 0.85em; }
+
+@media (max-width: 560px) {
+  button.continue .label { display: none; }
+  .grand-total { margin-left: 0; }
+  .entries th:nth-child(3), .entries td:nth-child(3),
+  .entries th:nth-child(4), .entries td:nth-child(4),
+  .tasks th:nth-child(3), .tasks td:nth-child(3) { display: none; }
+}

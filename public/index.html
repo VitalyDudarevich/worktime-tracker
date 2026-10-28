@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Work Time Tracker</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main>
+    <h1>Work Time Tracker</h1>
+    <p id="message" class="message" role="alert" hidden></p>
+
+    <div class="card toolbar">
+      <form id="add-employee" class="row">
+        <input name="name" placeholder="New employee name" maxlength="100" required aria-label="New employee name">
+        <button type="submit">Add</button>
+      </form>
+      <form id="filters" class="row">
+        <span class="date-field">
+          <label for="from">From</label>
+          <input id="from" name="from" class="date" placeholder="YYYY-MM-DD" autocomplete="off">
+        </span>
+        <span class="date-field">
+          <label for="to">to</label>
+          <input id="to" name="to" class="date" placeholder="YYYY-MM-DD" autocomplete="off">
+        </span>
+        <select name="employeeId" aria-label="Employee">
+          <option value="">All employees</option>
+        </select>
+        <select name="view" aria-label="View">
+          <option value="entries">By entry</option>
+          <option value="tasks">By task</option>
+        </select>
+        <button type="reset" class="link">Reset</button>
+        <span class="grand-total">Total: <strong id="grand-total">0:00:00</strong></span>
+      </form>
+    </div>
+
+    <p id="empty" class="muted" hidden>No employees yet. Add the first one.</p>
+    <div id="employees"></div>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
